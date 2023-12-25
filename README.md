@@ -29,57 +29,8 @@ The Poisson distribution is the discrete probability distribution of the number 
 ![image](https://user-images.githubusercontent.com/103921593/230282876-f4a5afbf-cac1-4648-a1b0-c78840638a8e.png)
 
 # Program :
-import numpy as np
-import math
-import scipy.stats
+![image](https://github.com/HARIPRASHAAD/Poisson_distribution/assets/144268297/ce7ee0af-4816-4395-9ec3-3df5236fc3d8)
 
-L = [int(i) for i in input().split()]
-N = len(L)
-M = max(L)
-X = list()
-f = list()
-
-for i in range(M + 1):
-    c = 0
-    for j in range(N):
-        if L[j] == i:
-            c += 1
-    f.append(c)
-    X.append(i)
-
-sf = np.sum(f)
-
-p = list()
-E = list()
-xi = list()
-
-print("X   P(X=x)   Obs.Fr   Exp.Fr   xi")
-print(" ")
-
-mean = np.inner(X, f) / N
-
-for x in range(M + 1):
-    p.append(math.exp(-mean) * mean**x / math.factorial(x))
-    E.append(p[x] * sf)
-    xi.append((f[x] - E[x])**2 / E[x])
-
-    print("%2d  %2.3f   %4d   %3.2f   %3.2f" % (X[x], p[x], f[x], E[x], xi[x]))
-
-print(" --")
-cal_chi2_sq = np.sum(xi)
-
-print("Calculated value of Chi square is %.2f" % cal_chi2_sq)
-
-table_chi2 = scipy.stats.chi2.ppf(1 - 0.01, df=M)
-
-print("Table value of chi square at 1 level is %.2f" % table_chi2)
-
-if cal_chi2_sq < table_chi2:
-    print("The given data can be fitted in Poisson Distribution at 1% level of significance")
-else:
-    print("The given data cannot be fitted in Poisson Distribution at 1% level of significance")
-
- 
 
 # Output : 
 ![image](https://github.com/HARIPRASHAAD/Poisson_distribution/assets/144268297/78ee84a6-04ff-4ea6-8745-c542fcc2367f)
